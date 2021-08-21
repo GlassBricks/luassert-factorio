@@ -1,0 +1,5 @@
+assert = require("luassert.init")
+spy = require("luassert.spy")
+mock = require("luassert.mock")
+stub = require("luassert.stub")
+match = require("luassert.match")

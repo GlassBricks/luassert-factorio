@@ -76,7 +76,6 @@ function util.shallowcopy(t)
 end
 
 function util.deepcopy(t, deepmt, cache)
-  local spy = require 'luassert.spy'
   if type(t) ~= "table" then return t end
   local copy = {}
 
@@ -103,8 +102,6 @@ end
 function util.copyargs(args)
   local copy = {}
   setmetatable(copy, getmetatable(args))
-  local match = require 'luassert.match'
-  local spy = require 'luassert.spy'
   for k,v in pairs(args) do
     copy[k] = ((match.is_matcher(v) or spy.is_spy(v)) and v or util.deepcopy(v))
   end
@@ -129,7 +126,6 @@ end
 -- @param specs arguments/return values to match against args/argsrefs
 -- @return true if specs match args/argsrefs, false otherwise
 local function matcharg(args, argrefs, specs)
-  local match = require 'luassert.match'
   for idx, argval in pairs(args) do
     local spec = specs[idx]
     if match.is_matcher(spec) then
@@ -303,13 +299,13 @@ function util.errorlevel(level)
   return level
 end
 
+local namespace = require 'luassert.namespaces'
 -----------------------------------------------
 -- Extract modifier and namespace keys from list of tokens.
 -- @param nspace the namespace from which to match tokens
 -- @param tokens list of tokens to search for keys
 -- @return table, list of keys that were extracted
 function util.extract_keys(nspace, tokens)
-  local namespace = require 'luassert.namespaces'
 
   -- find valid keys by coalescing tokens as needed, starting from the end
   local keys = {}
