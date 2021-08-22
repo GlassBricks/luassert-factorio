@@ -11,11 +11,14 @@ require('luassert.array')
 require('luassert.matchers.init')
 require('luassert.formatters.init')
 
--- load others (have globals for util.lua)
-require('luassert.spy')
-require('luassert.match')
 
 -- load default language
 require('luassert.languages.en')
+
+_G.assert = assert
+spy = require("luassert.spy")
+mock = require("luassert.mock")
+stub = require("luassert.stub")
+match = require("luassert.match")
 
 return assert
