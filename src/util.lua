@@ -8,12 +8,16 @@ local pack = function(...) return { n = select("#", ...), ... } end
 util.pack = pack
 util.unpack = unpack
 
+function is_factorio_object(obj)
+    return type(obj) == "table" and type(rawget(obj, "__self")) == "userdata"
+end
 
 function util.deepcompare(t1,t2,ignore_mt,cycles,thresh1,thresh2)
   local ty1 = type(t1)
   local ty2 = type(t2)
   -- non-table types can be directly compared
   if ty1 ~= 'table' or ty2 ~= 'table' then return t1 == t2 end
+  if is_factorio_object(t1) or is_factorio_object(t2) then return t1 == t2 end
   local mt1 = debug.getmetatable(t1)
   local mt2 = debug.getmetatable(t2)
   -- would equality be determined by metatable __eq?
