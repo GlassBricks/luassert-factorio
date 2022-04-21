@@ -80,7 +80,7 @@ function util.shallowcopy(t)
 end
 
 function util.deepcopy(t, deepmt, cache)
-  if type(t) ~= "table" then return t end
+  if type(t) ~= "table" or is_factorio_object(t) then return t end
   local copy = {}
 
   -- handle recursive tables
