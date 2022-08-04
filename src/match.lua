@@ -56,7 +56,7 @@ local state_mt = {
 }
 
 local match = {
-  _ = setmetatable({mod=true, callback=function() return true end}, matcher_mt),
+  _ = setmetatable({mod=true, callback=function() return true end, name="_", arguments={}}, matcher_mt),
 
   state = function() return setmetatable({mod=true, tokens={}}, state_mt) end,
 

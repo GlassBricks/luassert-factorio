@@ -8,7 +8,7 @@ local pack = function(...) return { n = select("#", ...), ... } end
 util.pack = pack
 util.unpack = unpack
 
-function is_factorio_object(obj)
+local function is_factorio_object(obj)
     return type(obj) == "table" and type(rawget(obj, "__self")) == "userdata"
 end
 
